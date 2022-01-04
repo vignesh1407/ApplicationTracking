@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+	use-expressions="true" auto-config="true">
+<head>
+<meta charset="ISO-8859-1">
+<title>Fachhochschule Dortmund</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+<link th:href="@{/styles/cssandjs/main.css}" rel="stylesheet" />
+</head>
+<body>
+<!-- create navigation bar ( header) -->
+	<nav class="navbar navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<!-- Button is not working as it is connected to the java-->
+					<button type="button" class="navbar-toggle collapsed"
+						data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+						aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+				</div>
+
+				<div class="nav navbar-nav navbar-left">
+					<a href="https://www.fh-dortmund.de/"> <img src=""
+						th:src="@{images/FHDO-Logo-large.svg}" />
+					</a>
+					<!-- <p class="heading"><b>Fachhochschule Dortmund</b></p> -->
+				</div>
+
+				<!-- this block of code only runs if the use is authenticated which is why I don't have access to java code just keeping them here so that it can be edited with the fields when the user is available-->
+				<div id="navbar" class="collapse navbar-collapse">
+					<!-- <ul class="nav navbar-nav navbar-right">
+              <li sec:authorize="isAuthenticated()">
+                <a th:href="@{/login}" class="btn btn-success">Login</a>
+              </li>
+            </ul> -->
+					<div>
+					<ul class="nav navbar-nav navbar-right">
+						<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"
+							class="btn btn-success">Logout</a></li>
+					</ul>
+					</div>
+					
+					<div>
+					<ul class="nav navbar-nav navbar-right">
+						<li sec:authorize="isAuthenticated()"><a
+							th:href="@{/}">Home</a></li>
+					</ul></div>
+				</div>
+			</div>
+		</nav>
+	<br>
+	<br>
+	<br>
+	<!-- Registration form design -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+
+				<!-- Success Message -->
+				<div th:if="${param.success}">
+					<div class="alert alert-info">You've successfully entered!</div>
+				</div>
+
+				<h1>Details</h1>
+
+				<form th:action="@{/content}" method="post"
+					th:object="${trackingResult}">
+
+					<div class="form-group">
+						<label class="control-label" for="applicationNumber">
+							Application Number </label> <input id="applicationNumber"
+							class="form-control" th:field="*{applicationNumber}" required
+							autofocus="autofocus" />
+					</div>
+
+					<div class="form-group">
+						<strong>Gender</strong>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio"
+								th:field="*{genderRef}" id="option1"
+								th:value="1 ? 'Male' : 'Female'"> <label
+								class="form-check-label" for="option1">Male</label>
+						</div>
+						<!-- <div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio"
+								th:field="*{genderRef}" id="option1" th:value=""> <label
+								class="form-check-label" for="option1">Male</label>
+						</div> -->
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio"
+								th:field="*{genderRef}" id="option2"
+								th:value="0 ? 'Male' : 'Female'"> <label
+								class="form-check-label" for="option2">Female</label>
+						</div>
+
+					</div>
+
+					<!-- <div class="form-group">
+						<label class="control-label" for="genderRef"> Gender </label>
+						<ul th:each="genderRef : ${allSampleGenders}">
+							<input type="radio" th:field="*{genderRef}"
+								th:value="${genderRef}" />
+							<label th:for="${#ids.prev('genderRef')}" th:text="${genderRef}">Male</label>
+						</ul>
+						<ul th:each="genderRef : ${allSampleGenders}">
+							<input type="radio" th:field="*{genderRef}"
+								th:value="${genderRef}" />
+							<label th:for="${#ids.prev('genderRef')}" th:text="${genderRef}">Female</label>
+						</ul>
+					</div> -->
+
+					<div class="form-group">
+						<label class="control-label" for="updatedBy"> Name </label> <input
+							id="updatedBy" class="form-control" th:field="*{updatedBy}"
+							required autofocus="autofocus" />
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label" for="email"> Applicant E-mail </label> <input
+							id="email" class="form-control" th:field="*{studentEmail}" required
+							autofocus="autofocus" />
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="email"> E-mail </label> <input
+							id="email" class="form-control" th:field="*{email}" required
+							autofocus="autofocus" />
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="updatedDate"> Updated On
+							(dd.mm.yyyy) </label> <input id="updatedDate"
+							class="form-control" th:field="*{updatedDate}"
+							placeholder="dd.mm.yyyy" required autofocus="autofocus" />
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="waitingTime"> Wait for </label>
+						<input id="waitingTime" class="form-control"
+							th:field="*{waitingTime}" required autofocus="autofocus" />
+					</div>
+
+					<div class="form-group">
+						<strong>Current update</strong>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio"
+								th:field="*{document}" id="option1"
+								th:value="1 ? 'Document Received' : ''"> <label
+								class="form-check-label" for="option1">Document Received</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio"
+								th:field="*{document}" id="option2"
+								th:value="1 ? 'Document Checking' : ''"> <label
+								class="form-check-label" for="option2">Document Checking</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio"
+								th:field="*{document}" id="option3"
+								th:value="1 ? 'All Documents Received':''"> <label
+								class="
+								form-check-label" for="option3">All Documents Received</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio"
+								th:field="*{document}" id="option4"
+								th:value="1 ? 'Missing Document':''">
+							<label class="
+								form-check-label" for="option4">Missing Document</label>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label" for="missingDocuments"> Any missing documents </label>
+						<input id="missingDocuments" class="form-control"
+							th:field="*{missingDocuments}" required autofocus="autofocus" />
+					</div>
+
+					<!-- <div class="form-group">
+						<label class="control-label" for="document"> Current
+							update</label>
+						<div>
+							<div>
+								<label th:for="${#ids.next('documentReceived')}">Document
+									Received:</label> <input type="radio" th:field="*{document}" /> 
+									<input
+									class="form-check-input" type="radio" th:field="*{days}"
+									id="option1" value="15"> <label
+									class="form-check-label" for="option1">15 Days</label
+							</div>
+							<div>
+								<label th:for="${#ids.next('documentChecking')}">Document
+									Checking:</label> <input type="radio" th:field="*{document}" />
+							</div>
+							<div>
+								<label th:for="${#ids.next('allDocuments')}">All
+									Documents Received:</label> <input type="radio" th:field="*{document}" />
+							</div>
+							<div>
+								<label th:for="${#ids.next('missingDocument')}">Missing
+									Document(s):</label> <input type="radio" th:field="*{document}" />
+							</div>
+						</div>
+					</div> -->
+
+					<!-- <br> <br> <br>
+					<br> <br> <br> -->
+					<div class="form-group">
+						<button type="submit" class="btn btn-success">Submit</button>
+						<!-- <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li> -->
+						<a href="#" th:href="@{/logout}">Log Out</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

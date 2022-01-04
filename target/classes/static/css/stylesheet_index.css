@@ -1,0 +1,95 @@
+/*
+  DEMO STYLE
+*/
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: #ffffff;
+  margin: 0;
+  color: #2e323c;
+  background: #f5f6fa;
+
+  height: 100%;
+}
+
+p {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.1em;
+  font-weight: 300;
+  line-height: 1.7em;
+  color: #999;
+}
+
+a,
+a:hover {
+}
+a:focus {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.navbar {
+  padding: 15px 10px;
+  background: #fff;
+  border: none;
+  border-radius: 0;
+  margin-bottom: 40px;
+  box-shadow: 1px 1px 3px rgba(214, 29, 29, 0.1);
+}
+
+.navbar img {
+  max-width: 15rem;
+  margin-left: 30px;
+  padding: 0.5rem 0.5rem;
+}
+.navbar-btn {
+  box-shadow: none;
+  outline: none !important;
+  border: none;
+}
+
+.line {
+  width: 100%;
+  height: 1px;
+  border-bottom: 1px dashed #ddd;
+  margin: 40px 0;
+}
+
+.heading {
+  margin: 12px 0 0 20px;
+  color: rgb(82, 80, 80);
+}
+
+.container {
+  margin-top: 45px;
+  padding-left: 0px;
+}
+
+.student_img {
+  max-width: 120rem;
+  min-height: 200;
+}
+
+.container .card {
+  background: #ffffff;
+  min-height: 19rem;
+  min-width: 120rem;
+}
+
+.container .card .card-body .heading {
+  font-size: 3rem;
+  font-weight: bold;
+  color: rgb(82, 80, 80);
+  padding-top: 3rem;
+  margin: 0px;
+  text-align: center;
+}
+
+.container .card .card-body .subheading {
+  font-size: 3rem;
+  color: rgb(82, 80, 80);
+  margin: 0px;
+  text-align: center;
+}
